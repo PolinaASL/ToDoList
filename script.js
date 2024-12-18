@@ -1,5 +1,5 @@
-import { createAppTitle, createTodoItemForm, createTodoList, createTodoItem } from './dom.js';
-import { addTodoItem, loadTodoItems, saveTodoItems } from './storage.js';
+import { createAppTitle, createTodoItemForm, createTodoList } from './dom.js';
+import { addTodoItem, loadTodoItems, clearTodoItems } from './storage.js';
 
 let todoList;
 
@@ -25,5 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
             addTodoItem(text, todoList);
             input.value = '';
         }
+    });
+
+    const clearButton = document.getElementById('clear-all');
+    clearButton.addEventListener('click', function() {
+        clearTodoItems(todoList);
     });
 });

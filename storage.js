@@ -3,16 +3,9 @@ import { createTodoItem } from './dom.js';
 export function addTodoItem(text, todoList) {
     const todoItem = createTodoItem(text);
     todoList.appendChild(todoItem);
-    saveTodoItems(todoList);
-}
-
-export function saveTodoItems(todoList) {
-    const items = [];
-    const todoItems = todoList.children;
-    for (const item of todoItems) {
-        items.push(item.textContent);
-    }
-    localStorage.setItem('todoItems', JSON.stringify(items));
+    const todoItems = JSON.parse(localStorage.getItem('todolist'))
+    todoItem.push(text);
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
 }
 
 export function loadTodoItems(todoList) {
@@ -24,4 +17,12 @@ export function loadTodoItems(todoList) {
             todoList.appendChild(todoItem);
         });
     }
+}
+
+export function clearTodoItems(todoList) {
+    while (todoList.firstChild) {
+        todoList.removeChild(todoList.firstChild);
+    }
+    localStorage.removeItem('todoItem');
+    loadTodoItems();
 }
