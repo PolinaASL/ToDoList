@@ -35,7 +35,7 @@ export function createTodoList() {
 
 export function createTodoItem(text) {
     const todoItem = document.createElement('li');
-    todoItem.className = 'list-group-item d-flex justify-content-between align-items-center'; // Added classes for better layout
+    todoItem.className = 'list-group-item d-flex justify-content-between align-items-center';
     const itemText = document.createElement('span');
     itemText.textContent = text;
     todoItem.appendChild(itemText);
