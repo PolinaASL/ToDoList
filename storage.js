@@ -1,11 +1,11 @@
 import { createTodoItem } from './dom.js';
 
 export function addTodoItem(text, todoList) {
+    const todoItems = JSON.parse(localStorage.getItem('todoItems')) || [];
+    todoItems.push(text);
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
     const todoItem = createTodoItem(text);
     todoList.appendChild(todoItem);
-    const todoItems = JSON.parse(localStorage.getItem('todolist'))
-    todoItem.push(text);
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
 }
 
 export function loadTodoItems(todoList) {
@@ -23,6 +23,6 @@ export function clearTodoItems(todoList) {
     while (todoList.firstChild) {
         todoList.removeChild(todoList.firstChild);
     }
-    localStorage.removeItem('todoItem');
-    loadTodoItems();
+    localStorage.removeItem('todoItems');
+    todoList.innerHTML = '';
 }

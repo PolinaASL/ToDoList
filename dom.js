@@ -35,7 +35,24 @@ export function createTodoList() {
 
 export function createTodoItem(text) {
     const todoItem = document.createElement('li');
-    todoItem.className = 'list-group-item';
-    todoItem.textContent = text;
+    todoItem.className = 'list-group-item d-flex justify-content-between align-items-center'; // Added classes for better layout
+    const itemText = document.createElement('span');
+    itemText.textContent = text;
+    todoItem.appendChild(itemText);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'btn btn-danger btn-sm';
+    deleteButton.textContent = 'Удалить';
+    deleteButton.addEventListener('click', function() {
+        const todoItems = JSON.parse(localStorage.getItem('todoItems')) || [];
+        const index = todoItems.indexOf(text);
+        if (index > -1){
+            todoItems.splice(index, 1);
+            localStorage.setItem('todoItems', JSON.stringify(todoItems));
+            todoItem.remove();
+        }
+    });
+
+    todoItem.appendChild(deleteButton);
     return todoItem;
 }
